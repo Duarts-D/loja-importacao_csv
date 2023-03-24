@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import InputView
+from .views import InputView,InventarioView
 
 urlpatterns = [
-    path('',InputView.as_view(),name='input_form')
+    path('importa_arquivo/',InputView.as_view(),name='input_form'),
+    path('',InventarioView.as_view(),name='inventario')
+
 ]

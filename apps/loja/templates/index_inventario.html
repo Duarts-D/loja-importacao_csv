@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block conteudo %}
+
+<div class="container px-4 px-lg-5">
+    
+{% include 'parciais/_messange.html' %}
+
+<div class="custom-file d-flex justify-content-center">
+    <form action="{% url 'buscar' %}">
+        <input type="text" name='buscar' placeholder="Buscar" class="form-control-lg" >
+        <button class="btn btn-dark" type="submit">Buscar</button>,
+    </form>
+</div>
+
+{% if not len(inventario) == 0 %}
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">Fabricante</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Cor</th>
+            <th scope="col">Plano</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">preco</th>
+        </tr>
+        {% for dado in inventario %}
+
+        <tr>
+            <td>{{dado.fabricante|title}}</td>
+            <td>{{dado.modelo|title}}</td>
+            <td>{{dado.cor|title}}</td>
+            <td>{{dado.plano}}</td>
+            <td>{{dado.quantidade}}</td>
+            <td>{{dado.preco_real}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% include 'parciais/_pagination.html' %}
+{%else%}
+<h1>Nao ah produtos adicionados por favor clique aqui para adicionar<h1>
+{%endblock%}
