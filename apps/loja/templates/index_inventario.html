@@ -5,15 +5,15 @@
 <div class="container px-4 px-lg-5">
     
 {% include 'parciais/_messange.html' %}
+{% if inventario %}
 
 <div class="custom-file d-flex justify-content-center">
-    <form action="{% url 'buscar' %}">
+    <form >
         <input type="text" name='buscar' placeholder="Buscar" class="form-control-lg" >
         <button class="btn btn-dark" type="submit">Buscar</button>,
     </form>
 </div>
 
-{% if not len(inventario) == 0 %}
 <div class="table-responsive">
     <table class="table table-striped">
         <tr>
@@ -40,6 +40,13 @@
 </div>
 </div>
 {% include 'parciais/_pagination.html' %}
-{%else%}
-<h1>Nao ah produtos adicionados por favor clique aqui para adicionar<h1>
+{% else %}
+
+<div class="custom-file d-flex justify-content-center">
+    <h1>Não ha produtos adicionados, 
+    <a href="{% url 'input_form'%}">
+        "clique aqui!"
+    </a>
+    </h1>
+        {% endif %}
 {%endblock%}

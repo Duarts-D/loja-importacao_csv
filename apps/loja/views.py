@@ -10,3 +10,4 @@ class InputView(View):
 class InventarioView(ListView):
     template_name = 'index_inventario.html'
     model = Produtos
+    context_object_name = 'inventario'
