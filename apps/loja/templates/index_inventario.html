@@ -5,14 +5,16 @@
 <div class="container px-4 px-lg-5">
     
 {% include 'parciais/_messange.html' %}
-{% if inventario %}
 
 <div class="custom-file d-flex justify-content-center">
-    <form >
-        <input type="text" name='buscar' placeholder="Buscar" class="form-control-lg" >
-        <button class="btn btn-dark" type="submit">Buscar</button>,
+    <form method="get">
+        <div class="mt-4 mb-4">
+            {{ filter.form }}
+            <button class="btn btn-dark" type="submit">Buscar</button>,
+        </div>
     </form>
 </div>
+{% if inventario %}
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -27,12 +29,12 @@
         {% for dado in inventario %}
 
         <tr>
-            <td>{{dado.fabricante|title}}</td>
-            <td>{{dado.modelo|title}}</td>
-            <td>{{dado.cor|title}}</td>
-            <td>{{dado.plano}}</td>
-            <td>{{dado.quantidade}}</td>
-            <td>{{dado.preco_real}}</td>
+            <td>{{dado.manufacturer|title}}</td>
+            <td>{{dado.model|title}}</td>
+            <td>{{dado.color|title}}</td>
+            <td>{{dado.carrier_plan_type}}</td>
+            <td>{{dado.quantity}}</td>
+            <td>{{dado.price}}</td>
         </tr>
         {% endfor %}
     </table>

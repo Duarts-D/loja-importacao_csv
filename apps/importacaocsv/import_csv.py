@@ -14,6 +14,7 @@ class ImportFromCsv:
 
     
     def verificar_colunas_x_arquivos_exiteste(self):
+        """Verifica se o arquivo contem as colunas exata para continuar com a verificaçao"""
         try:
             self.tabela = pd.read_csv(self.arquivos,usecols=['manufacturer','model','color','carrier_plan_type','quantity','price'])
             return self.validando_dados_necessario()
@@ -54,10 +55,15 @@ class ImportFromCsv:
             return self.msg
         return False
     
-    def salvando_dado_dados(self): 
+    def salvando_dado_dados(self):
+        """Salva os dados no banco de dados verifica se a arquivos duplicados,
+            remove para pode fazer o salvamente no banco de dados"""
+        duplicados = self.tabela.duplicated(subset=['manufacturer','model','color','carrier_plan_type'])
+        sem_item_duplicado = self.tabela[~duplicados]
+        
         produtos = []
         
-        for linha , coluna in self.tabela.iterrows():
+        for linha , coluna in sem_item_duplicado.iterrows():
             produtos.append(Produtos(
             manufacturer =  Fabricante.objects.get(fabricante=coluna['manufacturer'])\
                 if Fabricante.objects.filter(fabricante=coluna['manufacturer'])\
@@ -68,11 +74,13 @@ class ImportFromCsv:
             quantity = coluna['quantity'],
             price = coluna['price'])),
         
+        
         return produtos
     
     def save(self,model):
         self.verificar_tipo_arquivo()
         if len(self.msg) == 0:
-            salvar = self.salvando_dado_dados()
-            return model.objects.bulk_create(salvar)
+            dados = self.salvando_dado_dados()
+            return model.objects.bulk_create(dados)
+            
         return

@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from django.views.generic import ListView
-from .models import Produtos
+from .models import Produtos,Fabricante
 from apps.importacaocsv.import_csv import ImportFromCsv
 from django.contrib import messages
+from django_filters.views import FilterView
+from apps.loja.filters import InvetarioFilter
 
 class InputView(View):
     template_name = 'import_input.html'
@@ -26,7 +28,10 @@ class InputView(View):
     def get(self,*args):
         return render(self.request,self.template_name)
 
-class InventarioView(ListView):
-    template_name = 'index_inventario.html'
+class InventarioView(FilterView,ListView):
     model = Produtos
+    template_name = 'index_inventario.html'
     context_object_name = 'inventario'
+    paginate_by = 10
+    filterset_class = InvetarioFilter
+    
