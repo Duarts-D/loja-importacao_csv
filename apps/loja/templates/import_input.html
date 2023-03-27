@@ -4,7 +4,7 @@
 
 <section class="py-5">
     {% include 'parciais/_messange.html' %}
-        <form method="POST" enctype="multipart/form-data" >
+        <form method="POST" name='arquivo' enctype="multipart/form-data" >
             {% csrf_token %}
         <div class="custom-file d-flex justify-content-center">
             <input name='arquivo' type="file" id="inputGroupFile01" class="btn btn-lg btn-primary" required></button>
