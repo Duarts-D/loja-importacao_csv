@@ -3,17 +3,17 @@
 {% block conteudo %}
 
 <div class="container px-4 px-lg-5">
-    
-{% include 'parciais/_messange.html' %}
 
+{% include 'parciais/_messange.html' %}
+    
 <div class="custom-file d-flex justify-content-center">
-    <form method="get">
-        <div class="mt-4 mb-4">
+    <form method="get"class="mt-4 mb-4">
             {{ filter.form }}
             <button class="btn btn-dark" type="submit">Buscar</button>,
-        </div>
     </form>
 </div>
+
+
 {% if inventario %}
 
 <div class="table-responsive">
@@ -41,11 +41,11 @@
     </div>
 </div>
 </div>
-{% include 'parciais/_pagination.html' %}
+
 {% else %}
 
 <div class="custom-file d-flex justify-content-center">
-    <h1>Não ha produtos adicionados, 
+    <h1>Produtos nao encontrado deseja Adicionar? 
     <a href="{% url 'input_form'%}">
         "clique aqui!"
     </a>

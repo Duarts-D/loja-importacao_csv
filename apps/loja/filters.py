@@ -7,16 +7,18 @@ class InvetarioFilter(django_filters.FilterSet):
     manufacturer = django_filters.ModelChoiceFilter(queryset=Fabricante.objects.all(),
                                                     widget=Select(attrs={'class': 'form-control-lg',
                                                                          'placeholder':'Fabricante',
-                                                                         'value': 'foo'}),
+                                                                        }),
                                                                          lookup_expr='exact',label='',
-                                                                         empty_label='Fabricante'
+                                                                         empty_label='Fabricante',
                                                                          )
     carrier_plan_type = django_filters.CharFilter(lookup_expr='icontains',
                                                   widget=TextInput(attrs={'class': 'form-control-lg',
-                                                                          'placeholder':'Plano'}),label='')
+                                                                          'placeholder':'Plano',
+                                                                          }),label='')
     model = django_filters.CharFilter(lookup_expr='icontains',
                                       widget=TextInput(attrs={'class': 'form-control-lg',
-                                                              'placeholder':'Modelo'}),label='')
+                                                              'placeholder':'Modelo',
+                                                              }),label='')
 
     class Meta:
         model = Produtos

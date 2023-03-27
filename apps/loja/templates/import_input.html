@@ -7,8 +7,10 @@
         <form method="POST" name='arquivo' enctype="multipart/form-data" >
             {% csrf_token %}
         <div class="custom-file d-flex justify-content-center">
-            <input name='arquivo' type="file" id="inputGroupFile01" class="btn btn-lg btn-primary" required></button>
-            <button  type="submit" class="btn btn-danger btn-lg" >Enviar</button>
+            <div>
+            <button type="submit" class="btn btn-dark btn-lg mb-2" >Enviar</button>
+            <input name='arquivo' type="file" id="inputGroupFile01" class="form-control-lg" required>
+        </div>
         </div>
     </form >
 </section>
