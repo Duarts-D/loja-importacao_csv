@@ -79,7 +79,6 @@ class ImportFromCsv:
                 pro_cadastrado.quantity = coluna['quantity']
                 pro_cadastrado.price = coluna['price']
                 produto_atualizar.append(pro_cadastrado)
-                print('Cadastrados')
             else:
                 produtos.append(Produtos(
                 manufacturer =  fabricantes,
@@ -88,14 +87,12 @@ class ImportFromCsv:
                 carrier_plan_type = coluna['carrier_plan_type'],
                 quantity = coluna['quantity'],
                 price = coluna['price'])),
-        
-        model.objects.bulk_update(produto_atualizar,fields=['quantity','price'])
+        model.objects.bulk_update(produto_atualizar,fields=['quantity','price'],batch_size=100)
         return produtos
     
     def save(self,model):
         self.verificar_tipo_arquivo()
         if len(self.msg) == 0:
             dados = self.salvando_dado_dados(model)
-            return model.objects.bulk_create(dados)
-            
-        return
+            return model.objects.bulk_create(dados,batch_size=100)
+        

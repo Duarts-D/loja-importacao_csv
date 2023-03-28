@@ -3,16 +3,16 @@
 {% block conteudo %}
 
 <section class="py-5">
-    {% include 'parciais/_messange.html' %}
-        <form method="POST" name='arquivo' enctype="multipart/form-data" >
-            {% csrf_token %}
+    <form method="POST" name='arquivo' enctype="multipart/form-data" >
+    {% csrf_token %}
         <div class="custom-file d-flex justify-content-center">
             <div>
-            <button type="submit" class="btn btn-dark btn-lg mb-2" >Enviar</button>
-            <input name='arquivo' type="file" id="inputGroupFile01" class="form-control-lg" required>
-        </div>
+                <button type="submit" class="btn btn-dark btn-lg mb-2" >Enviar</button>
+                <input name='arquivo' type="file" id="inputGroupFile01" class="form-control-lg" required>
+            </div>
         </div>
     </form >
+    {% include 'parciais/_messange.html' %}
 </section>
 
 {% endblock%}

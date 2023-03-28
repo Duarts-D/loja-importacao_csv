@@ -19,7 +19,6 @@ class InputView(View):
             importar.save(Produtos)
             messages.success(self.request,'Importado com sucesso')
             return redirect('inventario')
-        
         for message in importar.erros():
             messages.error(self.request,message)
 
@@ -33,5 +32,6 @@ class InventarioView(FilterView,ListView):
     template_name = 'index_inventario.html'
     context_object_name = 'inventario'
     paginate_by = 10
+    ordering = ['-pk']
     filterset_class = InvetarioFilter
     
