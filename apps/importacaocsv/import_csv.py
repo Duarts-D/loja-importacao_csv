@@ -55,32 +55,47 @@ class ImportFromCsv:
             return self.msg
         return False
     
-    def salvando_dado_dados(self):
+    def salvando_dado_dados(self,model):
         """Salva os dados no banco de dados verifica se a arquivos duplicados,
             remove para pode fazer o salvamente no banco de dados"""
         duplicados = self.tabela.duplicated(subset=['manufacturer','model','color','carrier_plan_type'])
         sem_item_duplicado = self.tabela[~duplicados]
         
         produtos = []
+        produto_atualizar = []
         
-        for linha , coluna in sem_item_duplicado.iterrows():
-            produtos.append(Produtos(
-            manufacturer =  Fabricante.objects.get(fabricante=coluna['manufacturer'])\
-                if Fabricante.objects.filter(fabricante=coluna['manufacturer'])\
-                else Fabricante.objects.create(fabricante=coluna['manufacturer']),
-            model = coluna['model'],
-            color = coluna['color'],
-            carrier_plan_type = coluna['carrier_plan_type'],
-            quantity = coluna['quantity'],
-            price = coluna['price'])),
+        for index , coluna in sem_item_duplicado.iterrows():
+            
+            manufacturer = coluna['manufacturer'].lower().capitalize()
+            fabricantes = Fabricante.objects.get(fabricante = manufacturer)\
+                    if Fabricante.objects.filter(fabricante = manufacturer).first()\
+                    else Fabricante.objects.create(fabricante = manufacturer)
+
+            pro_cadastrado = Produtos.objects.filter(manufacturer=fabricantes,
+                                                  model= coluna['model'],
+                                                  color= coluna['color'],
+                                                  carrier_plan_type= coluna['carrier_plan_type']).first()
+            if pro_cadastrado:
+                pro_cadastrado.quantity = coluna['quantity']
+                pro_cadastrado.price = coluna['price']
+                produto_atualizar.append(pro_cadastrado)
+                print('Cadastrados')
+            else:
+                produtos.append(Produtos(
+                manufacturer =  fabricantes,
+                model = coluna['model'],
+                color = coluna['color'],
+                carrier_plan_type = coluna['carrier_plan_type'],
+                quantity = coluna['quantity'],
+                price = coluna['price'])),
         
-        
+        model.objects.bulk_update(produto_atualizar,fields=['quantity','price'])
         return produtos
     
     def save(self,model):
         self.verificar_tipo_arquivo()
         if len(self.msg) == 0:
-            dados = self.salvando_dado_dados()
+            dados = self.salvando_dado_dados(model)
             return model.objects.bulk_create(dados)
             
         return
