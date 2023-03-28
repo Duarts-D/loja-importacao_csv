@@ -21,8 +21,9 @@ class InputView(View):
             return redirect('inventario')
         for message in importar.erros():
             messages.error(self.request,message)
-
+        
         return render(self.request,self.template_name)
+
 
     def get(self,*args):
         return render(self.request,self.template_name)
