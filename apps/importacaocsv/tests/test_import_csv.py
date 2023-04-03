@@ -1,6 +1,4 @@
 from unittest.mock import patch, MagicMock,Mock
-from pytest_factoryboy import register
-import factory
 import pytest
 from apps.importacaocsv.import_csv import ImportFromCsv
 from apps.loja.models import Produtos,Fabricante

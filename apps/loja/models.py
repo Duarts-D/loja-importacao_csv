@@ -12,7 +12,7 @@ class Produtos(models.Model):
     color = models.CharField(max_length=100,)
     carrier_plan_type = models.CharField(max_length=100)
     quantity = models.PositiveIntegerField(default=0)
-    price = models.FloatField()
+    price = models.FloatField(verbose_name='Preço')
     
     @property
     def price_br(self):
