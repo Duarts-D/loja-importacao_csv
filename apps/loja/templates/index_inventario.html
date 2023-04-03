@@ -1,5 +1,7 @@
 {% extends 'base/base.html' %}
 
+{% block title %}<title> Inventario </title>{% endblock %}
+
 {% block conteudo %}
 
 <div class="container px-4 px-lg-5">
@@ -32,9 +34,9 @@
             <td>{{dado.manufacturer|title}}</td>
             <td>{{dado.model|title}}</td>
             <td>{{dado.color|title}}</td>
-            <td>{{dado.carrier_plan_type}}</td>
+            <td>{{dado.carrier_plan_type|title}}</td>
             <td>{{dado.quantity}}</td>
-            <td>{{dado.price}}</td>
+            <td>{{dado.price_br}}</td>
         </tr>
         {% endfor %}
     </table>

@@ -14,5 +14,12 @@ class Produtos(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     price = models.FloatField()
     
+    @property
+    def price_br(self):
+        price = self.price
+        price = f"R$ {price:_.2f}".replace('.',',').replace('_','.')
+        return price
+
     def __str__(self):
         return self.model
+    

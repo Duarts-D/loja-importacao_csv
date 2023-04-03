@@ -13,14 +13,16 @@ class InputView(View):
     def post(self,*args):
         arquivo = self.request.FILES['arquivo']
         
-        importar = ImportFromCsv(arquivo)
+        importador = ImportFromCsv(arquivo=arquivo)
+        erros = importador.erros()
+        importador.save()
+
+        if not erros:
+            messages.success(self.request,'Importado com sucesso.')
+            return redirect('inventario')    
         
-        if not importar.erros():
-            importar.save(Produtos)
-            messages.success(self.request,'Importado com sucesso')
-            return redirect('inventario')
-        for message in importar.erros():
-            messages.error(self.request,message)
+        for error in erros:
+            messages.error(self.request,error)
         
         return render(self.request,self.template_name)
 
@@ -30,6 +32,7 @@ class InputView(View):
 
 class InventarioView(FilterView,ListView):
     model = Produtos
+    title = 'Inventario'
     template_name = 'index_inventario.html'
     context_object_name = 'inventario'
     paginate_by = 10
