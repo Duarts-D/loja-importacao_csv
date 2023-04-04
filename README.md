@@ -7,7 +7,7 @@ A loja - importaçao csv e uma aplicaçao feito em python e django.
 
 A aplicaçao consiste em fazer upload de arquivo tipo csv , onde os dados sao coletados e verificados ,  se contem erros sao retornados para o usuario ,  conforme tudo for bem sucedido sera salvo no banco de dados, assim redirecionando o cliente  para uma lista de invetario ,onde ele podera verifica uma lista dos arquivo importados.
 
-A aplicaçao consiste em um sistema de upload de atualizaçao em arquivo salvo no sistema, atualizando somente quantidade e preço se os demais campos coincidirem em um produto.
+A aplicaçao consiste em um sistema de upload de atualizaçao em arquivo salvo no sistema, atualizando somente quantidade e preço, se os demais campos coincidirem em um produto.
 
 # Layout web
 ![web 1](https://github.com/Duarts-D/loja-importacao_csv/blob/master/img/inventario.PNG)
