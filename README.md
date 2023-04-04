@@ -41,15 +41,22 @@ Para roda o programa sem ocorrer travamentos, necessario
 python 3.10.10
 
 # Criar ambiente virtual
-Window - python -m venv venv
+Windows - python -m venv venv
 linux - python3 -m venv venv
 
 # Ativando ambiente virtual
-Window - .\venv\Scripts\Activate.ps1
+Windows - .\venv\Scripts\Activate.ps1
 linux - source venv\bin\activate
 
 # instalar dependências
 pip install -r requeriments.txt
+
+# rodando migraçoes
+windows - python manage.py makemigrations
+windows - python manage.py migrate
+
+linux - python3 manage.py makemigrations
+linux - python3 manage.py migrate
 
 # executar o projeto
 windows - python manage.py runserver
