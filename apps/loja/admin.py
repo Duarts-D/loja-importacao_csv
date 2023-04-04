@@ -4,12 +4,14 @@ from apps.loja.models import Fabricante,Produtos
 class ProdutosInline(admin.TabularInline):
     model = Produtos
     extra = 0
+
 class FabricanteAdmin(admin.ModelAdmin):
     inlines = [
         ProdutosInline
     ]
     def num_produtos(self,obj):
-        return obj.produtos_set.count()
+        quantidade_produtos = obj.produtos_set.count()
+        return quantidade_produtos
     
     num_produtos.short_description = 'Quantidade'
 

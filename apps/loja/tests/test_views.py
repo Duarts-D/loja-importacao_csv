@@ -26,7 +26,7 @@ class TestLojaViewsInputView:
         assert entrada.status_code == 200
         assert len(entrada.context['messages']) == 1
 
-    def test_inputview_post_arquivo_valido_redirecionando_para_inventario_e_retornando_msg_sucesso(self,client):
+    def test_inputview_post_arquivo_valido_redirecionando_para_inventario_e_retornando_msg(self,client):
         arquivo = self.arquivo
         arquivo.name = 'arquivo.csv'
         entrada = client.post(reverse('input_form'),{'arquivo':arquivo})
