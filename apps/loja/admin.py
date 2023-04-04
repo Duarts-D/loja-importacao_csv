@@ -23,7 +23,7 @@ admin.site.register(Fabricante,FabricanteAdmin)
 
 
 class ProdutosAdmin(admin.ModelAdmin):
-    list_display = ('model','manufacturer','carrier_plan_type','quantity','price_br',)
+    list_display = ('model','manufacturer','carrier_plan_type','color','quantity','price_br',)
     list_filter = ('manufacturer','carrier_plan_type')
     search_fields = ('model','manufacturer__fabricante')
     ordering = ('-id',)
